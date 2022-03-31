@@ -1,10 +1,5 @@
 #  Containers course
 
-Author: Liran Cohen
-
-Email: [liran@rct.co.il](mailto:liran@rct.co.il)
-
-
 # Containers concepts
 
 **<span style="text-decoration:underline;">Deliveries:</span>**

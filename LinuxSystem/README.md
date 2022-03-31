@@ -1,8 +1,5 @@
 #  Linux system course
 
-Author: Liran Cohen
-
-Email: [liran@rct.co.il](mailto:liran@rct.co.il)
 
 
 # Linux - preface and introduction

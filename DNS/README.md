@@ -1,9 +1,7 @@
 
 # DNS course
 
-Author: Liran Cohen
 
-Email: [liran@rct.co.il](mailto:liran@rct.co.il)
 
 # Dns basics and intro
 
@@ -332,3 +330,4 @@ Email: [liran@rct.co.il](mailto:liran@rct.co.il)
 
 * DIY: 3h
 * Frontal: 0.5h
+
