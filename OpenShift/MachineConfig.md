@@ -54,12 +54,18 @@ In this way, when the node is provisioned, it has the correct configuration from
 The Machine Config Server runs as a daemonset on masters and is attached to the host network. 
 It listens on the specific port that the Ignition process is instructed to reach out to when requesting ignition files
 
+<img width="682" alt="image" src="https://user-images.githubusercontent.com/100561043/167851262-e5b09d3a-4ab9-475a-8936-c1bc553ad2ad.png">
+
 
 ## Machine Config Daemon
 
 The `Machine Config Operator (MCO)` ensures that a `Machine Config Daemon (MCD)` runs on every node. 
 The MCD pulls the rendered MachineConfig object for the MachineConfigPool that matches the node, and then ensures that the defined files match the desired state and contents. 
 If changes are made to the MachineConfigs, the MCD will update the targeted files and configurations to match the desired state. In this way, the MCD prevents configuration drift.
+
+<img width="269" alt="image" src="https://user-images.githubusercontent.com/100561043/167851330-c1efaa36-c539-4fa3-b9e0-46c65e9e2bbd.png">
+
+
 
 The MCO coordinates with the MCD to perform the following actions, in a rolling manner, when OS updates and/or configuration changes are applied:
 - Cordon / uncordons nodes
@@ -68,5 +74,5 @@ The MCO coordinates with the MCD to perform the following actions, in a rolling 
   - OS upgrade
   - config changes
   - systemd units
--Reboot
+- Reboot
 
