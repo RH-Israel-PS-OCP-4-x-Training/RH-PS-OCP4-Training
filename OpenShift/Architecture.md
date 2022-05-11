@@ -39,12 +39,14 @@ There are two types of hosts in an OpenShift environment.
 The other type of host is the `Master`. 
 OpenShift uses **3** `masters` for __high availability__ and cluster quorum. User workload **does not** run on the masters.
 
-etcd is used to keep track of the state of everything in the cluster, from which users are logged in to where workload lives and more.
+`etcd` is used to keep track of the state of everything in the cluster, from which users are logged in to where workload lives and more.
 OpenShift is built on Kubernetes, and its core components are still there and directly accessible via Kubernetes’ APIs.
-OpenShift brings its own web console with special features for both administrators and developers. OpenShift makes its features available through its own API endpoints which follow the same standard as other Kubernetes APIs using Custom Resource Definitions. OpenShift also brings a full lifecycle management solution that’s deeply integrated which allows for seamless and automatic cluster upgrades from within the cluster itself.
-OpenShift includes a number of internal and support infrastructure services that make containers easier to use at scale.
-And, because these services all run in pods as part of the platform, they can be orchestrated like any other workload and made to run across all hosts in the environment.
-OpenShift also includes a log aggregation solution based on Fluentd, Elasticsearch, and Kibana. This integrated solution makes it easy to visualize and corroborate log events for applications that are scaled to many instances, and, it, too, is tied into OpenShift’s role-based access control (RBAC) ensuring that only the right people see the logs they are supposed to.
-OpenShift extends Kubernetes ingress capabilities with an integrated router that bridges traffic from outside the cluster into the software defined network (SDN). This routing solution makes it easy for workload to be exposed and made accessible to consumers that are not inside the cluster.
+
+- OpenShift brings its own web console with special features for both administrators and developers. 
+- OpenShift makes its features available through its own API endpoints which follow the same standard as other Kubernetes APIs using Custom Resource Definitions. 
+- OpenShift also brings a full lifecycle management solution that’s deeply integrated which allows for seamless and automatic cluster upgrades from within the cluster itself.
+- OpenShift includes a number of internal and support infrastructure services that make containers easier to use at scale And, because these services all run in pods as part of the platform, they can be orchestrated like any other workload and made to run across all hosts in the environment.
+- OpenShift also includes a log aggregation solution based on Fluentd, Elasticsearch, and Kibana. This integrated solution makes it easy to visualize and corroborate log events for applications that are scaled to many instances, and, it, too, is tied into OpenShift’s role-based access control (RBAC) ensuring that only the right people see the logs they are supposed to.
+- OpenShift extends Kubernetes ingress capabilities with an integrated router that bridges traffic from outside the cluster into the software defined network (SDN). This routing solution makes it easy for workload to be exposed and made accessible to consumers that are not inside the cluster.
 
 
