@@ -123,3 +123,9 @@ A readiness probe examines whether an application is ready to receive traffic an
 
 Probes are powerful ways to increase the reliability and availability of applications in OpenShift.
 
+## Namespace
+projects isolate apps across environments, teams, groups and departments via a concept named `Namespace`
+
+<img width="599" alt="image" src="https://user-images.githubusercontent.com/100561043/167841550-9c88140b-bba3-4099-bb26-3b443d06b206.png">
+
+
