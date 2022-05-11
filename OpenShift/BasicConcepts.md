@@ -47,11 +47,7 @@ are responsible to define how to roll out new versions of Pods
 | Deployments | DeploymentConfig |
 | :---: | :---: |
 | Deployments is driven by a controller manager | Use deployer pods for every new rollout |
-| Deployments take availability over consistency
-The controller manager runs in high availability mode on masters and uses leader election algorithms to value availability over consistency
- | DeploymentConfigs prefer consistency.
-If a node running a deployer pod goes down, it will not get replaced. The process waits until the node comes back online or is manually deleted
- |
+| Deployments take availability over consistency The controller manager runs in high availability mode on masters and uses leader election algorithms to value availability over consistency | DeploymentConfigs prefer consistency If a node running a deployer pod goes down, it will not get replaced. The process waits until the node comes back online or is manually deleted  |
 | Has an implicit ConfigChange trigger.  Every change in the deployment automatically triggers a new rollout | ConfigChange triggers are explicit |
 | Do not yet support any lifecycle hooks | Support lifecycle hooks (pre, mid, post) |
 | Rollback to the last ReplicatSet is not supported. | Support automatically rolling back to the last successfully deployed ReplicationController |
