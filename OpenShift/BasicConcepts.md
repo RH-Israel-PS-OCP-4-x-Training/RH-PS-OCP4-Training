@@ -32,15 +32,33 @@ A `pod` wraps a `container` and provide:
 - Network
 - Storage
 
+You can view the pods on the cluster with this command:
+``` oc get pods --all-namespaces  ```
+
+To view a specipic pod and get see yaml:
+
+```
+oc describe pod <pod-name> -n <pod-namespace> 
+
+oc get pod <pod-name> -n <pod namespace> -o yaml > <file-name>.txt
+```
+
 ## ReplicaSet V.S ReplicationController
 
 Both are used to manage and ensure a specified number of pods are running at any given time at the cluster.
 But `ReplicationController` does not support set-based selector requirements, and `ReplicaSet` do.
 
+```
+ oc get replicaset --all-namespaces
+
+ oc get ReplicationController --all-namespaces
+```
 
 ## Deployments
 
 are responsible to define how to roll out new versions of Pods
+
+``` oc get deploy --all-namespaces```
 
 ## Deployments V.S DeploymentConfig
 
@@ -51,4 +69,34 @@ are responsible to define how to roll out new versions of Pods
 | Has an implicit ConfigChange trigger.  Every change in the deployment automatically triggers a new rollout | ConfigChange triggers are explicit |
 | Do not yet support any lifecycle hooks | Support lifecycle hooks (pre, mid, post) |
 | Rollback to the last ReplicatSet is not supported. | Support automatically rolling back to the last successfully deployed ReplicationController |
+
+
+## daemonset
+ensures that all (or some) nodes run a copy of a pod, it's a process that runs on every node.
+
+## configmaps
+allow you to decouple configuration artifacts from image content
+```oc get configmaps```
+
+<img width="749" alt="image" src="https://user-images.githubusercontent.com/100561043/167813905-11500275-6943-461e-881c-6e138a68915f.png">
+
+## secrets
+provide a mechanism to hold sensitive information such as passwords
+```oc get secrets```
+
+
+## Service and Route
+
+`oc get svc --all-namespaces`
+` oc get routes --all-namespaces `
+
+`Service` provide internal load-balancing and service discovery across pods, it is the way of communicate internally between components.
+`Route` make services accessible to clients outside the environment via real-world urls
+
+<img width="815" alt="image" src="https://user-images.githubusercontent.com/100561043/167814698-eb229ff9-8238-4327-aaf3-14adcf7454f4.png">
+
+`Route` make services accessible to clients outside the environment via real-world urls
+`Pods` running on OpenShift don’t need to go through the routing layer and can interact with each other directly through the `services`.
+After the `router` discovers the `Pod` endpoints via the `service`, it sends the `Pod` traffic directly to those endpoints and bypasses the `service` layer.
+DNS resolution for a host name is handled separately from routing. Admin may have configured a DNS wildcard entry that will resolve to the node that is running the OpenShift Container Platform router
 
