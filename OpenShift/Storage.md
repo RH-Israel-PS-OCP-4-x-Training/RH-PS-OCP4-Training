@@ -45,6 +45,9 @@ PVs outlive the containers that were using them.
 - Admins creates a catalog of StorageClasses available in the OpenShift cluster. StorageClass names are arbitrary names to communicate their characteristics
 - Users can create a Persistent Volume Claim and specify the name of a StorageClass to instruct OpenShift on the type of persistent volume that should be provisioned for the them
 
+<img width="828" alt="image" src="https://user-images.githubusercontent.com/100561043/167840230-5e029909-c0ea-491e-be1e-014681c523c9.png">
+
+
 
 # CSI
 
