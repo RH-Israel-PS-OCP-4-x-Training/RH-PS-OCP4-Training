@@ -83,6 +83,35 @@ The egress service redirects the traffic to the egress routers which in turn sen
 
 - Multiple egress IPs (egress pods) can be configured (one on each node) so that if cluster detects that one egress IP has stopped working (node failure), it would fail over and use another egress IP on the other nodes that are preconfigured.
 
-<img width="516" alt="image" src="https://user-images.githubusercontent.com/100561043/167855778-420adf36-fb9f-4ce1-9936-020413ad8afe.png">
+<img width="516" alt="image" src="https://user-images.githubusercontent.com/100561043/167856168-fb560a36-775f-49df-86bf-a16df1f28617.png">
+
+### Controlling egress traffic - Egress IP high availability (multiple IPs)
+
+`Egress IPs`, as opposed to egress router which is deployed as a pod, are OpenShift construct and are configured on the node via modifying the node object e.g. via:
+```
+oc patch hostsubnet node2 -p '{"egressIPs": ["IP 4"]}'
+oc patch hostsubnet node3 -p '{"egressIPs": ["IP 5"]}'
+```
+
+The egress IPs have nothing to do with the IPs normally assigned to the host interfaces.
+
+<img width="461" alt="image" src="https://user-images.githubusercontent.com/100561043/167856618-6f4e991f-06d2-4387-89e8-25b89a1d76b4.png">
+
+Project admins can then assign one or multiple egress IPs (for failover) to a project, which would force all traffic from the pods in that project (regardless of which nodes they are running on) to use the primary egress IP as the source IP. Note that in this case, the OSV flows will be set up automatically to redirect any traffic from the project to the node that has the primary egress IP (Node 2 ) and then send to the destination from there. 
+
+
+
+<img width="461" alt="image" src="https://user-images.githubusercontent.com/100561043/167857295-c3c4a9fe-d5ad-454e-a109-a514140affb2.png">
+
+
+In case of failure (node crashes, etc) of the primary egress IP (IP 4), OSV will automatically configure the traffic flows so that traffic from all pods in the project go through the node that owns the secondary egress IP (Node 3) and use that egress IP (IP 5) as the source IP of all traffic. 
+
+The current HA Egress source IP feature requires that multiple egress IP addresses be whitelisted on the service endpoint and/or edge router, an often valuable commodity in the data center.
+
+
+We are targeting an optional variation of the functionality which enables the ability to use a single IP that can be migrated from its current, failed node to a healthy node (“fully automatic”).  While a single HA IP is more efficient use of the address space and easier to manage, additional steps are required in the IP-moving solution that would take several (valuable) seconds to complete, and may not be suitable for delay-sensitive customers: 
+the master must update a HostSubnet object with the new IP assignments
+the nodes would have to observe that change and react to it
+For this reason, we’ll eventually make both options available as a choice.
 
 
