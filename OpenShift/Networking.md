@@ -37,6 +37,8 @@ Split Traffic Between Multiple Services For A/B Testing, Blue/Green and Canary D
 
 ## External IP
 
+<img width="261" alt="image" src="https://user-images.githubusercontent.com/100561043/167854526-baa609cd-0d1f-40f8-970f-afc8d21f96ba.png">
+
 - `External IP` allows assigning an external IP to a service so that client outside of the OpenShift cluster can connect to services inside the Openshift cluster (e.g. database, JMS broker) on that port. 
 This is particularly useful for services that are running on ports other than 80/433, otherwise router is a more suitable alternative. 
 It is also useful when the client needs to know a specific IP for the service in order to open firewalls or while-list it in their own system.
@@ -56,4 +58,31 @@ When a service is configured with the type LoadBalancer, an External IP address 
 - The IP failover pods are responsible for providing the external IP range (Virtual IPs) and would run on one or more of the nodes (more than one for high availability) in the cluster or they can just run on the HAProxy (router) nodes.
 
 - The OpenShift cluster administrator must ensure that the external IP address pool terminates at one or more nodes in the cluster.
+
+
+
+## egress traffic 
+
+### Controlling egress traffic - default kubernetes behavior
+
+Pod traffic by default comes from the IP of the node that the pod is running on and therefore the external service needs to whitelist the IP of all nodes that a certain application might be scheduled on.
+
+**Advantage**: simple to configure as not special configuration is needed on OpenShift other than making sure (via labeling) pods which need to access the external service are scheduled on the node that is whitelisted
+**Disadvantage**: whitelisting is not very granular and any pod scheduled on the whitelisted node can access the external service
+
+<img width="396" alt="image" src="https://user-images.githubusercontent.com/100561043/167855349-e4983de3-2356-47ff-bf9f-b0979810c5dd.png">
+
+
+### Controlling egress traffic - Egress router
+
+- Egress router runs a service that redirects (proxies) traffic to a specified remote server, using a private source IP address that is not used for anything else. 
+The service allows pods to talk to servers that are setup to only allow access from whitelisted IP addresses. When deploying an egress router, an IP address from the physical network that the node itself is on is reserved by the cluster administrator to be used by the egress router.
+
+- Application pods access the external service using the egress service on the service internal IP address or service name. 
+The egress service redirects the traffic to the egress routers which in turn send the traffic to the external service with the egress IP (reserved on the node it’s running on) as the source IP. The external service accepts the traffic since the source IP (egress router IPs) is whitelisted.
+
+- Multiple egress IPs (egress pods) can be configured (one on each node) so that if cluster detects that one egress IP has stopped working (node failure), it would fail over and use another egress IP on the other nodes that are preconfigured.
+
+<img width="516" alt="image" src="https://user-images.githubusercontent.com/100561043/167855778-420adf36-fb9f-4ce1-9936-020413ad8afe.png">
+
 
