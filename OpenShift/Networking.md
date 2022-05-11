@@ -114,4 +114,51 @@ the master must update a HostSubnet object with the new IP assignments
 the nodes would have to observe that change and react to it
 For this reason, we’ll eventually make both options available as a choice.
 
+## NetworkPolicy
 
+`NetworkPolicy` allows project administrators to configure granular isolation rules using NetworkPolicy objects.
+A network policy is a specification of how groups of pods (using labels) are allowed to communicate with each other and other network endpoints
+
+<img width="266" alt="image" src="https://user-images.githubusercontent.com/100561043/167860735-4a871031-09e7-4a16-a40d-a71fd2b2c579.png">
+
+
+## OpenShift SDN
+
+OpenShift 4 clusters are using OpenShift SDN NetworkPolicy as the default networking solution. The default behavior is wide-open network across projects/namespaces (no policies applied). It is possible to install the cluster in a multitenant mode as an install-time configuration option. In this scenario, all projects/namespaces are network isolated from each other by default, but all can be accessed by the router and can access the cluster registry and other internal services. When installed in this mode, the SDN operator configures the cluster’s project request template to ensure that all new projects/namespaces have isolating policy objects.
+
+**OPEN NETWORK  (Default)**
+- All pods can communicate with each other across projects
+
+**MULTI-TENANT NETWORK**
+- Project-level network isolation
+- Multicast support
+- Egress network policies
+
+### SDN configuration 
+
+__Networking Advanced Settings__
+
+These are the OpenShift SDN settings that can be tweaked at install-time:
+- Mode: NetworkPolicy (default) , Multitenant, Subnet
+-VXLAN Port Number
+-MTU (autodetected, once)
+-External OpenVSwitch
+
+NOTE: Most network settings cannot be changed safely and affect the entire cluster.  The operator will prevent unsafe changes.   If you need to force a change to a non-production cluster, see the operator README for the command, but a cluster re-install is likely to be the better choice.
+
+
+### OpenShift SDN high-level architecture
+
+<img width="472" alt="image" src="https://user-images.githubusercontent.com/100561043/167860351-7dcc5112-a9e5-4064-8fce-33abbb34650b.png">
+
+- Pods are connected via an overlay network which enables IP-per-Pod networking and direct pod-to-pod communication
+- The Pod IPs are independent of the physical network the OpenShift Nodes are connected to
+
+### OpenShift SDN packet flows container-container across hosts
+
+<img width="444" alt="image" src="https://user-images.githubusercontent.com/100561043/167861048-89e77439-293a-4951-b82d-2950d2f16f88.png">
+
+
+### OpenShift SDN packet flows container leaving the host
+
+<img width="511" alt="image" src="https://user-images.githubusercontent.com/100561043/167861150-27dfe4fb-baf3-47c7-bc43-6bd926107172.png">
