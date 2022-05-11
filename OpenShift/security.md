@@ -53,6 +53,7 @@ Note that this overlaps with Service Mesh’s ability to provide transparent mut
  
  ## Identity and Access Management
 
+<img width="682" alt="image" src="https://user-images.githubusercontent.com/100561043/167845064-56a3abda-d49c-4bb1-af8c-06d42ca335cf.png">
 
 OpenShift includes an OAuth server, which does three things: 
 - Identifies the person requesting a token, using a configured identity provider
@@ -68,4 +69,21 @@ OpenShift includes an OAuth server, which does three things:
 - In many cases the credentials are validated against the identity provider directly (not necessarily given to the OAuth server)
 
 
+ ## Fine-Grained RBAC
+
+- Project scope & cluster scope available
+- Matches request attributes (verb,object,etc)
+- If no roles match, request is 
+- denied ( deny by default )
+- Operator- and user-level 
+- roles are defined by default
+- Custom roles are supported
+
+In OpenShift we have a role based authorization component. 
+There is a Project scope and a Cluster scope where either `RoleBindings` or `ClusterRolebindings` define the permissions a user will have once logged in. This role component matches attributes on the request like the verb on the objects for example  get projects or create pods. 
+It matches those attributes to roles which have been grated to the requesting user. 
+If no roles match the request is denied. 
+By default everything is denied unless the role specifically allows it. Out of the box operator and user level roles are defined and custom roles are also supported. 	
+
+ 
  
