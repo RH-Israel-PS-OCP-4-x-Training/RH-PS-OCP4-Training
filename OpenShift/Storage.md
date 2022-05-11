@@ -60,7 +60,8 @@ PVs outlive the containers that were using them.
   - Sidecars assist with hooks for additional functionality - snapshots, resizing, etc
 - Each node hosts, via a DaemonSet, one or more CSI node plugin Pods for the driver
   - Kubelet requests the node plugin to mount/unmount volumes, format block devices if needed, etc 
-
-
-
 - `StorageClass` is a blueprint of how to provision persistent volumes on a network storage. OpenShift provides a set of provisioners that determine what volume plugins should be used for provisioning the volumes. OpenShift also supports third-party plugins that are not part of Kubernetes, such as NetApp Trident
+
+
+
+<img width="535" alt="image" src="https://user-images.githubusercontent.com/100561043/167840738-9da28807-a469-4782-9132-c247906faf2d.png">
