@@ -51,3 +51,21 @@ Note that this overlaps with Service Mesh’s ability to provide transparent mut
   - apiservice-cabundle-injector controller
  
  
+ ## Identity and Access Management
+
+
+OpenShift includes an OAuth server, which does three things: 
+- Identifies the person requesting a token, using a configured identity provider
+- Determines a mapping from that identity to an OpenShift user
+- Issues an OAuth access token which authenticates that user to the API 
+
+
+### Configuring an Identity provider
+
+- Determines a mapping from that identity to an OpenShift user
+  - Allows multiple identities to map to the same OpenShift user
+  - Allows deconflicting between identity provider roles
+- In many cases the credentials are validated against the identity provider directly (not necessarily given to the OAuth server)
+
+
+ 
