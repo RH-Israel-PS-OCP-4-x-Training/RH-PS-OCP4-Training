@@ -50,7 +50,8 @@ But `ReplicationController` does not support set-based selector requirements, an
 
 ```
  oc get replicaset --all-namespaces
-
+```
+```
  oc get ReplicationController --all-namespaces
 ```
 
@@ -87,8 +88,8 @@ provide a mechanism to hold sensitive information such as passwords
 
 ## Service and Route
 
-`oc get svc --all-namespaces`
-` oc get routes --all-namespaces `
+```oc get svc --all-namespaces```
+``` oc get routes --all-namespaces ```
 
 `Service` provide internal load-balancing and service discovery across pods, it is the way of communicate internally between components.
 `Route` make services accessible to clients outside the environment via real-world urls
@@ -99,4 +100,26 @@ provide a mechanism to hold sensitive information such as passwords
 `Pods` running on OpenShift don’t need to go through the routing layer and can interact with each other directly through the `services`.
 After the `router` discovers the `Pod` endpoints via the `service`, it sends the `Pod` traffic directly to those endpoints and bypasses the `service` layer.
 DNS resolution for a host name is handled separately from routing. Admin may have configured a DNS wildcard entry that will resolve to the node that is running the OpenShift Container Platform router
+
+## Persistent Volume Claims
+
+<img width="552" alt="image" src="https://user-images.githubusercontent.com/100561043/167820726-434cd2cf-1572-4d30-ae34-28e2ff0b74f7.png">
+```
+oc get pv --all-namespaces
+```
+
+```
+oc get pvc --all-namespaces
+```
+
+OpenShift and Kubernetes can handle stateful applications that require storage, too. Users create claims for storage, and OpenShift connects those claims to real storage volumes. When applications are deployed, OpenShift automatically connects the real storage into the container as specified by the end user. And, as applications move around in the cluster, the storage automatically follows them. Many different storage types are supported, from raw to block to file, both read-write-once and read-write-many.
+
+## Liveness and Readiness
+
+OpenShift includes two types of probes for evaluating the status of applications. 
+A liveness probe examines whether an application is functioning properly and, if not, causes it to be restarted. 
+
+A readiness probe examines whether an application is ready to receive traffic and, if not, causes it to be removed from the service endpoint list. 
+
+Probes are powerful ways to increase the reliability and availability of applications in OpenShift.
 
