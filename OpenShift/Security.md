@@ -1,5 +1,8 @@
-### lets start from Linux :) --> SELinux
+## Basic Linux Security Concepts
 
+> ### Files & Dir permissions #ToDO @barak
+
+### SELinux
 - Everything in the operating system has a label
 - Policy defines the interaction between a labeled process and labeled resources
 - Policy comes with the distribution but you can add your own
@@ -8,15 +11,22 @@
 - Systems with SELinux enabled are less susceptible (e.g. container breakouts)
 - Namespaces - isolation primitives
 
-## Use OpenShift Security Context Constraints to manage these controls
+> ### Capabilities #ToDO @barak
+
+## SCC - OpenShift Security Context Constraints
 
 - Allow administrators to control permissions for pods
-- Restricted SCC is granted to all users
-- By default, no containers can run as root
+- Restricted SCC is granted to all users **by default**
+- By default, no container can run as root
 - Admin can grant access to privileged SCC
 - Custom SCCs can be created
 
-To view the existing SCC: `oc describe scc`
+To view the existing SCC: 
+```bash
+$ oc get scc
+$ oc describe scc restricted
+$ oc describe scc privileged
+```
 
 
 ## Certificates and Certificate Management
@@ -51,7 +61,7 @@ Note that this overlaps with Service Mesh’s ability to provide transparent mut
   - apiservice-cabundle-injector controller
  
  
- ## Identity and Access Management
+## Identity and Access Management
 
 <img width="682" alt="image" src="https://user-images.githubusercontent.com/100561043/167845064-56a3abda-d49c-4bb1-af8c-06d42ca335cf.png">
 
@@ -69,7 +79,7 @@ OpenShift includes an OAuth server, which does three things:
 - In many cases the credentials are validated against the identity provider directly (not necessarily given to the OAuth server)
 
 
- ## Fine-Grained RBAC
+## Fine-Grained RBAC
 
 - Project scope & cluster scope available
 - Matches request attributes (verb,object,etc)
