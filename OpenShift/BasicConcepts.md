@@ -1,16 +1,29 @@
 # Lets Learn Basic Concepts
 
-OpenShift uses Podman on the bastion machine, so we will use podman as-well 
+~~OpenShift uses Podman on the bastion machine, so we will use podman as-well~~
+> Please Fix @barak
 
-## what is `container`
+## Image & Container
 
-The `container` is the smallest compute unit.
-You can view the running containers with ```podman ps```
-
-A container is created by a static build called `Image` that holds the binaries:
-
+A `container` is created by a static build called `Image` that holds the binaries:
 
 <img width="344" alt="image" src="https://user-images.githubusercontent.com/100561043/167797354-5c04ecd1-f915-4c09-a3c0-0388aacd8bdb.png">
+
+By using the [Podman](https://podman.io/) utility tool, we can build, run and manage images and containers.
+
+With podman you can:
+
+1. Pull Remote Images & Store localy & View 
+2. Login to Remote Registries (Images' "store")
+3. Run Containers from images & View all containers
+4. Open a shell into the container
+* And much more
+> Please add examples @barak
+
+> Please Consider Podman-dedicated chapter @barak
+
+~~You can view the running containers with $ podman ps~~ 
+>Please Fix @barak 
 
 
 On Openshift platform images are saved on a `Registry`:
@@ -37,11 +50,20 @@ You can view the pods on the cluster with this command:
 
 To view a specipic pod and get see yaml:
 
-```
-oc describe pod <pod-name> -n <pod-namespace> 
+```bash
+$ oc describe pod <pod-name> -n <pod-namespace> 
 
-oc get pod <pod-name> -n <pod namespace> -o yaml > <file-name>.txt
+$ oc get pod <pod-name> -n <pod namespace> -o yaml > <file-name>.txt
 ```
+---
+
+## Namespace
+projects isolate apps across environments, teams, groups and departments via a concept named `Namespace`
+This is a logical seperation, and each namespace has its own `Quata`, `limits` and resources.
+
+<img width="599" alt="image" src="https://user-images.githubusercontent.com/100561043/167841550-9c88140b-bba3-4099-bb26-3b443d06b206.png">
+
+---
 
 ## ReplicaSet V.S ReplicationController
 
@@ -122,11 +144,5 @@ A liveness probe examines whether an application is functioning properly and, if
 A readiness probe examines whether an application is ready to receive traffic and, if not, causes it to be removed from the service endpoint list. 
 
 Probes are powerful ways to increase the reliability and availability of applications in OpenShift.
-
-## Namespace
-projects isolate apps across environments, teams, groups and departments via a concept named `Namespace`
-This is a logical seperation, and each namespace has its own `Quata`, `limits` and resources.
-
-<img width="599" alt="image" src="https://user-images.githubusercontent.com/100561043/167841550-9c88140b-bba3-4099-bb26-3b443d06b206.png">
 
 
