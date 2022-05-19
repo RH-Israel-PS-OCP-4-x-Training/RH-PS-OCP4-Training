@@ -8,15 +8,25 @@ The basic:
  - **x** execute - you may execute or run the file if it is a program or script
 
 For every file we define 3 sets of people for whom we may specify permissions.
-- owner - a single person who owns the file. (typically the person who created the file but ownership may be granted to some one else by certain users)
-- group - every file belongs to a single group.
-- thers - everyone else who is not in the group or the owner.
+- u: owner - a single person who owns the file. (typically the person who created the file but ownership may be granted to some one else by certain users)
+- g: group - every file belongs to a single group.
+- o: others - everyone else who is not in the group or the owner.
 
 To view permissioms to file type:
 ``` ll  <path-to-file> ```
 and watch at the start of the line:
-<img width="87" alt="image" src="https://user-images.githubusercontent.com/100561043/169302574-35defe09-5cfb-44db-b32c-8ce2d24c3b27.png">
 
+<img width="100" alt="image" src="https://user-images.githubusercontent.com/100561043/169302574-35defe09-5cfb-44db-b32c-8ce2d24c3b27.png">
+
+__Note that the order of permissions is always read, then write then execute__
+
+The first character identifies the file type. If it is a dash **( - )** then it is a normal file. If it is a **d** then it is a directory.
+
+The following 3 characters represent the permissions for the owner. A letter represents the presence of a permission and a dash ( - ) represents the absence of a permission.
+
+The following 3 characters represent the permissions for the group. In this example the group has the ability to read but not write or execute. 
+
+Finally the last 3 characters represent the permissions for others (or everyone else)
 
 ### SELinux
 - Everything in the operating system has a label
