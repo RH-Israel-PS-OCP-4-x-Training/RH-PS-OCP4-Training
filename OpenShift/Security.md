@@ -52,6 +52,14 @@ To understand how this shorthand method works we first need a little background 
 | 6	| 1 1 0 |
 | 7	| 1 1 1 |
 
+so inorder to change permissions you can run:
+```
+chmod <number-for-owner><nubmer-for-group><number-for-others> [path]
+
+```
+like: ``` chmod 751 file.txt ```
+
+
 
 ### SELinux
 - Everything in the operating system has a label
@@ -62,22 +70,9 @@ To understand how this shorthand method works we first need a little background 
 - Systems with SELinux enabled are less susceptible (e.g. container breakouts)
 - Namespaces - isolation primitives
 
-> ### Capabilities #ToDO @barak
+to drill down you can:
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/pdf/using_selinux/red_hat_enterprise_linux-8-using_selinux-en-us.pdf
 
-## SCC - OpenShift Security Context Constraints
-
-- Allow administrators to control permissions for pods
-- Restricted SCC is granted to all users **by default**
-- By default, no container can run as root
-- Admin can grant access to privileged SCC
-- Custom SCCs can be created
-
-To view the existing SCC: 
-```bash
-$ oc get scc
-$ oc describe scc restricted
-$ oc describe scc privileged
-```
 
 
 ## Certificates and Certificate Management
@@ -147,4 +142,35 @@ If no roles match the request is denied.
 By default everything is denied unless the role specifically allows it. Out of the box operator and user level roles are defined and custom roles are also supported. 	
 
  
+
+## SCC - OpenShift Security Context Constraints
+
+Similar to the way that RBAC resources control user access, administrators can use security context constraints (SCCs) to control permissions for pods. These permissions include actions that a pod can perform and what resources it can access. You can use SCCs to define a set of conditions that a pod must run with to be accepted into the system.
+
+Security context constraints allow an administrator to control:
+
+- Whether a pod can run privileged containers with the allowPrivilegedContainer flag.
+- Whether a pod is constrained with the allowPrivilegeEscalation flag.
+- The capabilities that a container can request
+- The use of host directories as volumes
+- The SELinux context of the container
+- The container user ID
+- The use of host namespaces and networking
+- The allocation of an FSGroup that owns the pod volumes
+- The configuration of allowable supplemental groups
+- Whether a container requires write access to its root file system
+- The usage of volume types
+- The configuration of allowable seccomp profiles
+
+plaese review to learn more about SCC:
+https://docs.openshift.com/container-platform/4.6/authentication/managing-security-context-constraints.html
+
+
+To view the existing SCC: 
+```bash
+$ oc get scc
+$ oc describe scc restricted
+$ oc describe scc privileged
+```
+
  
