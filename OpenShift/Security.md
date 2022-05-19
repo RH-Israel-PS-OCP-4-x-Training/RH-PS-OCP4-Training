@@ -1,6 +1,22 @@
-## Basic Linux Security Concepts
+# Basic Linux Security Concepts
 
-> ### Files & Dir permissions #ToDO @barak
+### Files & Dir premissions 
+
+The basic:
+ - **r** read - you may view the contents of the file
+ - **w** write - you may change the contents of the file
+ - **x** execute - you may execute or run the file if it is a program or script
+
+For every file we define 3 sets of people for whom we may specify permissions.
+- owner - a single person who owns the file. (typically the person who created the file but ownership may be granted to some one else by certain users)
+- group - every file belongs to a single group.
+- thers - everyone else who is not in the group or the owner.
+
+To view permissioms to file type:
+``` ll  <path-to-file> ```
+and watch at the start of the line:
+<img width="87" alt="image" src="https://user-images.githubusercontent.com/100561043/169302574-35defe09-5cfb-44db-b32c-8ce2d24c3b27.png">
+
 
 ### SELinux
 - Everything in the operating system has a label
