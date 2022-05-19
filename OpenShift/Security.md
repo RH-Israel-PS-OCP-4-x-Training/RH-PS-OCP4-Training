@@ -20,13 +20,38 @@ and watch at the start of the line:
 
 __Note that the order of permissions is always read, then write then execute__
 
-The first character identifies the file type. If it is a dash **( - )** then it is a normal file. If it is a **d** then it is a directory.
+- The first character identifies the file type. If it is a dash **( - )** then it is a normal file. If it is a **d** then it is a directory.
 
-The following 3 characters represent the permissions for the owner. A letter represents the presence of a permission and a dash ( - ) represents the absence of a permission.
+- The following 3 characters represent the permissions for the owner. A letter represents the presence of a permission and a dash ( - ) represents the absence of a permission.
 
-The following 3 characters represent the permissions for the group. In this example the group has the ability to read but not write or execute. 
+- The following 3 characters represent the permissions for the group. In this example the group has the ability to read but not write or execute. 
 
-Finally the last 3 characters represent the permissions for others (or everyone else)
+- Finally the last 3 characters represent the permissions for others (or everyone else)
+
+#### chmod
+You can change a file (or a dir) permissions with ```chmod```:
+
+``` chmod [permissions] [path] ```
+- Who are we changing the permission for? [ugoa] - user (or owner), group, others, all
+- Are we granting or revoking the permission - indicated with either a plus ( + ) or minus ( - )
+- Which permission are we setting? - read ( r ), write ( w ) or execute ( x )
+
+
+The method outlined above is not too hard for setting permissions but it can be a little tedious if we have a specific set of permissions we would like to apply regularly to certain files. Luckily, there is a shorthand way to specify permissions that makes this easy.
+
+To understand how this shorthand method works we first need a little background in number systems. Our typical number system is decimal. It is a base 10 number system and as such has 10 symbols (0 - 9) used. Another number system is octal which is base 8 (0-7). Now it just so happens that with 3 permissions and each being on or off, we have 8 possible combinations (2^3). Now we can also represent our numbers using binary which only has 2 symbols (0 and 1). The mapping of octal to binary is in the table below.
+
+|Octal|	Binary|
+| -- | -- |
+| 0	| 0 0 0 | 
+| 1	| 0 0 1 |
+| 2	| 0 1 0 |
+| 3	| 0 1 1 |
+| 4	| 1 0 0 |
+| 5	| 1 0 1 |
+| 6	| 1 1 0 |
+| 7	| 1 1 1 |
+
 
 ### SELinux
 - Everything in the operating system has a label
