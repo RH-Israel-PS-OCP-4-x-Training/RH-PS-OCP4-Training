@@ -1,8 +1,5 @@
 # Lets Learn Basic Concepts
 
-~~OpenShift uses Podman on the bastion machine, so we will use podman as-well~~
-> Please Fix @barak
-
 ## Image & Container
 
 A `container` is created by a static build called `Image` that holds the binaries:
@@ -18,12 +15,8 @@ With podman you can:
 3. Run Containers from images & View all containers
 4. Open a shell into the container
 * And much more
-> Please add examples @barak
 
-> Please Consider Podman-dedicated chapter @barak
-
-~~You can view the running containers with $ podman ps~~ 
->Please Fix @barak 
+-- insert the podman small guide here --
 
 
 On Openshift platform images are saved on a `Registry`:
@@ -126,9 +119,7 @@ DNS resolution for a host name is handled separately from routing. Admin may hav
 ## Persistent Volume Claims
 
 <img width="552" alt="image" src="https://user-images.githubusercontent.com/100561043/167820726-434cd2cf-1572-4d30-ae34-28e2ff0b74f7.png">
-```
-oc get pv --all-namespaces
-```
+
 
 ```
 oc get pvc --all-namespaces
